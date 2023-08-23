@@ -6,7 +6,7 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/msvc_sink.h>
 
-SKSEPluginInfo(.Version   = REL::Version{ 1, 0, 0, 0 },
+SKSEPluginInfo(.Version   = REL::Version{ 1, 0, 0, 1 },
     .Name                 = "Horseback",
     .Author               = "usernameak",
     .SupportEmail         = "usernameak@protonmail.com",
@@ -44,7 +44,7 @@ void InitLogger() {
 
 static float TESObjectREFR_GetRelevantWaterHeight(RE::TESObjectREFR *self) {
     using func_t = decltype(&TESObjectREFR_GetRelevantWaterHeight);
-    REL::Relocation<func_t> func{ RELOCATION_ID(0, 19839) };
+    REL::Relocation<func_t> func{ RELOCATION_ID(19411, 19839) };
     return func(self);
 }
 
@@ -82,7 +82,7 @@ struct Pathing;
 
 static void Pathing_GetCharacterLocation(Pathing *self, BSNavmeshLocationInfo *info, RE::TESObjectREFR *refr) {
     using func_t = decltype(&Pathing_GetCharacterLocation);
-    REL::Relocation<func_t> func{ RELOCATION_ID(0, 30635) };
+    REL::Relocation<func_t> func{ RELOCATION_ID(29819, 30635) };
     func(self, info, refr);
 }
 
@@ -96,14 +96,14 @@ struct FindTriangleForLocationWaterFilter {
 static FindTriangleForLocationWaterFilter *
 FindTriangleForLocationWaterFilter_ctor(FindTriangleForLocationWaterFilter *self, float waterHeight) {
     using func_t = decltype(&FindTriangleForLocationWaterFilter_ctor);
-    REL::Relocation<func_t> func{ RELOCATION_ID(0, 90392) };
+    REL::Relocation<func_t> func{ RELOCATION_ID(88005, 90392) };
     return func(self, waterHeight);
 }
 
 static bool
 BSNavmeshLocationInfo_FindTriangleForLocation(BSNavmeshLocationInfo *self, FindTriangleForLocationWaterFilter *filter) {
     using func_t = decltype(&BSNavmeshLocationInfo_FindTriangleForLocation);
-    REL::Relocation<func_t> func{ RELOCATION_ID(0, 90367) };
+    REL::Relocation<func_t> func{ RELOCATION_ID(87983, 90367) };
     return func(self, filter);
 }
 
@@ -123,7 +123,7 @@ static void DamageActorValue(RE::Actor *actor, RE::ACTOR_VALUE_MODIFIER avModifi
             RE::TESObjectREFR *horseReference = horseActor->AsReference();
             float relevantWaterHeight         = TESObjectREFR_GetRelevantWaterHeight(horseReference);
 
-            REL::Relocation<Pathing *> pathing{ RELOCATION_ID(0, 401037) };
+            REL::Relocation<Pathing *> pathing{ RELOCATION_ID(514893, 401037) };
 
             BSNavmeshLocationInfo navmeshInfo{};
             Pathing_GetCharacterLocation(pathing.get(), &navmeshInfo, horseReference);
