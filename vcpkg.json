@@ -1,0 +1,7 @@
+{
+  "name": "horseback",
+  "version-string": "0.1.0-dev",
+  "dependencies": [
+    "commonlibsse-ng-flatrim"
+  ]
+}
