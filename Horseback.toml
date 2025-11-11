@@ -1,0 +1,23 @@
+# Module that reduces stamina consumption when horse is on a road.
+[modules.RoadStamina]
+
+# Enables the module.
+enabled = true
+
+# If this value is negative, horse regenerates stamina when sprinting on road. If it is 0, stamina stays at a constant value.
+# If it is positive, horse loses stamina when sprinting on road. Value of 1 makes it stamina consumption behave like in vanilla.
+staminaConsumptionRateOnRoad = -0.4
+
+
+
+# EXPERIMENTAL module that allows horses to enter loading doors.
+# Use at your own risk! It works, but has some issues:
+# 1. Horse can get stuck when travelling through smaller doors.
+#    If that happens, `disable` in in console, and then `enable` it back.
+#    It will then respawn on the next fast travel.
+# 2. Partial mounting animation plays when crossing loading doors on a horse.
+# 3. Door hitboxes may be very hard to hit for smaller doors.
+[modules.HorseInCells]
+
+# Enables the module.
+enabled = false
