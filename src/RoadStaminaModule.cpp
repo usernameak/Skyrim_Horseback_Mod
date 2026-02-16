@@ -137,6 +137,6 @@ static void DamageActorValue(RE::Actor *actor, RE::ACTOR_VALUE_MODIFIER avModifi
 }
 
 void hback::RoadStaminaModule::dataLoaded() {
-    auto damageAvHookAddr       = REL::RelocationID{ 37522, 38467 }.address() + 0x14;
+    auto damageAvHookAddr       = RELOCATION_ID(37522, 38467).address() + 0x14;
     DamageActorValue_Trampoline = SKSE::GetTrampoline().write_call<5>(damageAvHookAddr, reinterpret_cast<uintptr_t>(&DamageActorValue));
 }

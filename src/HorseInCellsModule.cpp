@@ -47,19 +47,19 @@ static void TESObjectREFR_MoveRefToNewSpace(RE::TESObjectREFR *self, RE::TESObje
 
 static void Actor_Func38705(RE::Actor *self, uint32_t unknown) {
     using func_t = decltype(&Actor_Func38705);
-    static REL::Relocation<func_t> func{ RELOCATION_ID(0, 38705) };
+    static REL::Relocation<func_t> func{ RELOCATION_ID(37760, 38705) };
     return func(self, unknown);
 }
 
 static void Actor_Func37170(RE::Actor *self) {
     using func_t = decltype(&Actor_Func37170);
-    static REL::Relocation<func_t> func{ RELOCATION_ID(0, 37170) };
+    static REL::Relocation<func_t> func{ RELOCATION_ID(36191, 37170) };
     return func(self);
 }
 
 static bool Actor_Mount(RE::Actor *self, RE::Actor *other) {
     using func_t = decltype(&Actor_Mount);
-    static REL::Relocation<func_t> func{ RELOCATION_ID(0, 37905) };
+    static REL::Relocation<func_t> func{ RELOCATION_ID(36881, 37905) };
     return func(self, other);
 }
 
@@ -118,7 +118,7 @@ struct Character_ValidateInteraction_Hook {
     static inline REL::Relocation<decltype(thunk)> func;
 
     static void Install() {
-        REL::Relocation<std::uintptr_t> target{ RELOCATION_ID(0, 38706) };
+        REL::Relocation<std::uintptr_t> target{ RELOCATION_ID(37761, 38706) };
         po3helpers::HookFunctionPrologue<Character_ValidateInteraction_Hook, 5>(target.address());
     }
 };
@@ -146,7 +146,7 @@ struct PlayerCharacter_UpdateCellTransitions_Hook {
     static inline REL::Relocation<decltype(thunk)> func;
 
     static void Install() {
-        REL::Relocation<std::uintptr_t> target{ RELOCATION_ID(0, 40438) };
+        REL::Relocation<std::uintptr_t> target{ RELOCATION_ID(39366, 40438) };
         po3helpers::HookFunctionPrologue<PlayerCharacter_UpdateCellTransitions_Hook, 5>(target.address());
     }
 };
@@ -163,13 +163,13 @@ size_t hback::HorseInCellsModule::getTrampolineSize() const {
 
 void hback::HorseInCellsModule::dataLoaded() {
     // 1.6.1179 and 1.6.640 seem to match
-    auto updateCrosshairPickTextHookAddr         = REL::RelocationID{ 0, 40621 }.address() + 0xA3;
+    auto updateCrosshairPickTextHookAddr         = RELOCATION_ID(39535, 40621).address() + 0xA3;
     UpdateCrosshairPickText_IsOnMount_Trampoline = SKSE::GetTrampoline().write_call<5>(
         updateCrosshairPickTextHookAddr,
         reinterpret_cast<uintptr_t>(&Fake_IsOnMount));
 
     // 1.6.1179 and 1.6.640 seem to match
-    auto doorActHookAddr                        = REL::RelocationID{ 0, 17922 }.address() + 0x125;
+    auto doorActHookAddr                        = RELOCATION_ID(17521, 17922).address() + 0x125;
     TESObjectDOOR_Activate_IsOnMount_Trampoline = SKSE::GetTrampoline().write_call<5>(
         doorActHookAddr,
         reinterpret_cast<uintptr_t>(&Fake_IsOnMount));

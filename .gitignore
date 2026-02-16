@@ -3,3 +3,9 @@
 *.swp
 *.bak
 /tmp
+/build
+/vsxmake2022
+/.xmake
+/.vs
+*~
+

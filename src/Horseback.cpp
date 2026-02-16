@@ -9,23 +9,16 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/msvc_sink.h>
 
-SKSEPluginInfo(.Version   = REL::Version{ 1, 0, 2, 1 },
-    .Name                 = "Horseback",
-    .Author               = "usernameak",
-    .SupportEmail         = "usernameak@protonmail.com",
-    .StructCompatibility  = SKSE::StructCompatibility::Independent,
-    .RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary);
-
 void InitLogger() {
     auto path = SKSE::log::log_directory();
     if (!path)
         return;
 
     auto plugin = SKSE::PluginDeclaration::GetSingleton();
-    *path /= fmt::format(FMT_STRING("{}.log"), plugin->GetName());
+    *path /= std::format("{}.log", plugin->GetName());
 
     std::shared_ptr<spdlog::sinks::sink> sink;
-    if (SKSE::WinAPI::IsDebuggerPresent()) {
+    if (REX::W32::IsDebuggerPresent()) {
         sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
     } else {
         sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
@@ -65,7 +58,7 @@ static void SKSEMessageHandler(SKSE::MessagingInterface::Message *message) {
     }
 }
 
-extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface *skse) {
+SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     InitLogger();
 
     SKSE::Init(skse);
