@@ -1,7 +1,23 @@
+// Horseback -- mod for The Elder Scrolls V: Skyrim that extends
+// horseback riding features.
+// Copyright (C) 2023-2026  usernameak
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, version 3 of the License.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #include "RoadStaminaModule.hpp"
 
-#include <SKSE/SKSE.h>
 #include <RE/Skyrim.h>
+#include <SKSE/SKSE.h>
 
 // 19839 = TESObjectREFR::GetRelevantWaterHeight
 // 30635 = Pathing::GetCharacterLocation
@@ -106,7 +122,7 @@ static void DamageActorValue(RE::Actor *actor, RE::ACTOR_VALUE_MODIFIER avModifi
         actorValue == RE::ActorValue::kStamina &&
         avModifier == RE::ACTOR_VALUE_MODIFIER::kDamage) {
         RE::ActorPtr horseActor = nullptr;
-        if (player->GetMount(horseActor)) {
+        if (player->GetMount(horseActor) && actor == horseActor.get()) {
             // found a horse (or not a horse? todo: needs check)
 
             RE::TESObjectREFR *horseReference = horseActor->AsReference();
@@ -127,7 +143,7 @@ static void DamageActorValue(RE::Actor *actor, RE::ACTOR_VALUE_MODIFIER avModifi
                     bool isPreferred = navmesh->triangles[navmeshInfo.m_triangleIndex]
                                            .triangleFlags.all(RE::BSNavmeshTriangle::TriangleFlag::kPreferred);
                     if (isPreferred) {
-                        value = -value * st_roadStaminaModule->getStaminaConsumptionRateOnRoad();
+                        value = value * st_roadStaminaModule->getStaminaConsumptionRateOnRoad();
                     }
                 }
             }

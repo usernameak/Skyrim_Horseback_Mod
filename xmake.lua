@@ -2,7 +2,7 @@ includes("lib/commonlibsse")
 
 set_project("Horseback")
 set_version("1.0.3")
-set_license("BSD-3-Clause")
+set_license("GPL-3.0-only")
 set_languages("c++23")
 
 add_rules("mode.debug", "mode.releasedbg")
@@ -18,6 +18,8 @@ if is_mode("debug") then
     add_defines("_DEBUG")
 end
 
+add_defines("NOMINMAX")
+
 rule("msvc_settings")
     on_config(function (target)
         if is_mode("releasedbg") then
@@ -28,10 +30,7 @@ rule("msvc_settings")
         end
     end)
 
-target("commonlibsse")
-    add_rules("msvc_settings")
-
-target("commonlib-shared")
+target("commonlibsse-ng")
     add_rules("msvc_settings")
 
 target("Horseback")
